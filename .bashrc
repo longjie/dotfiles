@@ -111,9 +111,22 @@ if [ `domainname` = NEOROBOT ]; then
     export https_proxy=proxy50.adm.toyota.co.jp:15520
 fi
 
+# pwdから上にたどってROSのワークスペースを探し最初に見つかったものに設定する
 function change_ws() {
-    unset ROS_DISTRO
-    export CATKIN_WORKSPACE=`readlink -f $1`
-    export USER_PACKAGE_PATH=$CATKIN_WORKSPACE/devel
-    source $USER_PACKAGE_PATH/setup.bash
+    CUR=$PWD
+    while [[ $CUR != $HOME ]]; do
+	if [ -f "$CUR"/devel/setup.bash ]; then
+	    export CATKIN_WORKSPACE=$CUR
+	    export USER_PACKAGE_PATH=$CATKIN_WORKSPACE/devel
+	    source $USER_PACKAGE_PATH/setup.bash
+	    echo "ROS workspace: $CUR"
+	    break
+	fi
+	CUR=`readlink -f $CUR/..`
+    done
 }
+
+# tmuxで起動されたときにROSのワークスペースを設定する
+if [ -n "$TMUX" ]; then
+    change_ws
+fi
