@@ -28,12 +28,12 @@
   (toggle-read-only))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
-;(setq url-proxy-services
-;      '(("http"  . "proxy.tytlabs.co.jp:10080")
-;	("https" . "proxy.tytlabs.co.jp:10080")))
+(setq url-proxy-services
+      '(("http"  . "proxy.tytlabs.co.jp:10080")
+	("https" . "proxy.tytlabs.co.jp:10080")))
 
-;(setq url-http-proxy-basic-auth-storage
-;      '(("proxy.tytlabs.co.jp:10080" ("Proxy" . "ZTEyNDM6R2VuTW90bzI0"))))
+(setq url-http-proxy-basic-auth-storage
+      '(("proxy.tytlabs.co.jp:10080" ("Proxy" . "ZTEyNDM6R2VuTW90bzI0"))))
 
 ;; package settings
 (require 'package)
@@ -135,14 +135,14 @@
   (invoke-rosemacs)
   (global-set-key "\C-x\C-r" ros-keymap))
 
-;; (defun ROS-c-mode-hook()
-;;   (setq c-basic-offset 2)
-;;   (setq indent-tabs-mode nil)
-;;   (c-set-offset 'substatement-open 0)
-;;   (c-set-offset 'innamespace 0)
-;;   (c-set-offset 'case-label '+))
-;; (add-hook 'c-mode-common-hook 'ROS-c-mode-hook)
-;; (add-hook 'c++-mode-hook 'ROS-c-mode-hook)
+(defun ROS-c-mode-hook()
+  (setq c-basic-offset 2)
+  (setq indent-tabs-mode nil)
+  (c-set-offset 'substatement-open 0)
+  (c-set-offset 'innamespace 0)
+  (c-set-offset 'case-label '+))
+(add-hook 'c-mode-common-hook 'ROS-c-mode-hook)
+(add-hook 'c++-mode-hook 'ROS-c-mode-hook)
 (add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
 
 ;; Magit (git client for emacs)
