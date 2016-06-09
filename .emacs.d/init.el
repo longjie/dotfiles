@@ -2,8 +2,14 @@
 (global-set-key "\C-h" 'delete-backward-char)
 (global-set-key "\C-cc" 'compile)
 
+;; set default theme
+(load-theme 'deeper-blue t)
+
 ;; user's emacs lisp
 (add-to-list 'load-path "~/elisp")
+
+;; disable tool bar
+(tool-bar-mode nil)
 
 ;; trying ipython tab completion: that works :)
 (setq
@@ -82,6 +88,10 @@
              (c-set-style "cc-mode")
              (gtags-mode 1)))
 
+(add-hook 'c-mode-common-hook
+          '(lambda ()
+             (gtags-mode 1)))
+
 (defvar cproto-program "cproto") 
 (defun cproto-header (base-name) 
   (format "#ifndef _%s_H\n#define _%s_H\n\n" base-name base-name))
@@ -151,3 +161,21 @@
 ;; Cython mode
 (require 'cython-mode nil t)
 (add-to-list 'auto-mode-alist '("\\.pyx\\'" . cython-mode))
+
+;; catkin_make
+(if (getenv "CATKIN_WORKSPACE")
+    (setq compile-command "catkin_make -C $CATKIN_WORKSPACE"))
+
+;;
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(tool-bar-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
