@@ -151,3 +151,7 @@
 ;; Cython mode
 (require 'cython-mode nil t)
 (add-to-list 'auto-mode-alist '("\\.pyx\\'" . cython-mode))
+
+;; Octave mode
+(require 'ocrave-mode nil t)
+(add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
