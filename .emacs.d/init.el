@@ -53,6 +53,15 @@
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)
 
+;; flycheck
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(setq flycheck-flake8-maximum-line-length 128)
+
+;; autopep8
+(require 'py-autopep8)
+(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+(setq py-autopep8-options '("--max-line-length=128"))
+
 (autoload 'markdown-mode "markdown-mode"
    "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
@@ -90,7 +99,8 @@
 
 (add-hook 'c-mode-common-hook
           '(lambda ()
-             (gtags-mode 1)))
+             (gtags-mode 1)
+	     (c-set-offset 'inextern-lang 0)))
 
 (defvar cproto-program "cproto") 
 (defun cproto-header (base-name) 
