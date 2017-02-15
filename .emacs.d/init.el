@@ -56,7 +56,7 @@
 ;; flycheck
 ;;(add-hook 'after-init-hook #'global-flycheck-mode)
 ;;(setq flycheck-flake8-maximum-line-length 128)
-(add-hook 'c-mode-common-hook 'flycheck-mode)
+;;(add-hook 'c-mode-common-hook 'flycheck-mode)
 
 ;; autopep8
 (require 'py-autopep8)
@@ -207,3 +207,23 @@
 (global-set-key (kbd "M-RET m") 'srefactor-lisp-format-sexp)
 (global-set-key (kbd "M-RET d") 'srefactor-lisp-format-defun)
 (global-set-key (kbd "M-RET b") 'srefactor-lisp-format-buffer)
+
+(require 'cedet)
+(global-ede-mode t)
+
+(defun my-semantic-hook ()
+  (semantic-add-system-include
+   (expand-file-name "~/Codes/ros/tarp4_ws/src/tarp4/include" 'c-mode)))
+
+(add-hook 'semantic-init-hooks 'my-semantic-hook)
+  
+;; Automatically formats C code with GNU indent
+(defun c-auto-format ()
+  "Automatically formats C code with GNU indent"
+  (interactive)
+  (when (find major-mode '(c-mode c++-mode))
+    (shell-command
+     (format "indent %s" (shell-quote-argument (buffer-file-name))))
+    (revert-buffer t t t)))
+
+(add-hook 'after-save-hook 'c-auto-format)
