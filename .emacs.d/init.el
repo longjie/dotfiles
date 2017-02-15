@@ -50,17 +50,18 @@
 (package-initialize)
 
 ;; Standard Jedi.el setting
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)
+;(add-hook 'python-mode-hook 'jedi:setup)
+;(setq jedi:complete-on-dot t)
 
 ;; flycheck
-(add-hook 'after-init-hook #'global-flycheck-mode)
-(setq flycheck-flake8-maximum-line-length 128)
+;;(add-hook 'after-init-hook #'global-flycheck-mode)
+;;(setq flycheck-flake8-maximum-line-length 128)
+(add-hook 'c-mode-common-hook 'flycheck-mode)
 
 ;; autopep8
 (require 'py-autopep8)
 (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-(setq py-autopep8-options '("--max-line-length=128"))
+;;(setq py-autopep8-options '("--max-line-length=128"))
 
 (autoload 'markdown-mode "markdown-mode"
    "Major mode for editing Markdown files" t)
@@ -189,3 +190,16 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(require 'srefactor)
+(require 'srefactor-lisp)
+
+;; OPTIONAL: ADD IT ONLY IF YOU USE C/C++. 
+(semantic-mode 1) ;; -> this is optional for Lisp
+
+(define-key c-mode-map (kbd "M-RET") 'srefactor-refactor-at-point)
+(define-key c++-mode-map (kbd "M-RET") 'srefactor-refactor-at-point)
+(global-set-key (kbd "M-RET o") 'srefactor-lisp-one-line)
+(global-set-key (kbd "M-RET m") 'srefactor-lisp-format-sexp)
+(global-set-key (kbd "M-RET d") 'srefactor-lisp-format-defun)
+(global-set-key (kbd "M-RET b") 'srefactor-lisp-format-buffer)
