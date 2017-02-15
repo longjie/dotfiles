@@ -208,15 +208,16 @@
 (global-set-key (kbd "M-RET d") 'srefactor-lisp-format-defun)
 (global-set-key (kbd "M-RET b") 'srefactor-lisp-format-buffer)
 
-(require 'cedet)
-(global-ede-mode t)
+
+;; CEDET
+;; (require 'cedet)
+;; (global-ede-mode t)
 
 (defun my-semantic-hook ()
   (semantic-add-system-include
    (expand-file-name "~/Codes/ros/tarp4_ws/src/tarp4/include" 'c-mode)))
-
 (add-hook 'semantic-init-hooks 'my-semantic-hook)
-  
+
 ;; Automatically formats C code with GNU indent
 (defun c-auto-format ()
   "Automatically formats C code with GNU indent"
@@ -227,3 +228,17 @@
     (revert-buffer t t t)))
 
 (add-hook 'after-save-hook 'c-auto-format)
+
+
+;; function-args (altanative to CEDET)
+;; (require 'function-args)
+;; (fa-config-default)
+
+;; (define-key function-args-mode-map (kbd "M-o") nil)
+;; (define-key c-mode-map (kbd "C-M-:") 'moo-complete)
+;; (define-key c++-mode-map (kbd "C-M-:") 'moo-complete)
+
+;(require 'auto-complete)
+(require 'auto-complete-config)
+;(global-auto-complete-mode t)
+(setq-default ac-sources '(ac-source-semantic-raw))
