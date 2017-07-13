@@ -115,7 +115,13 @@ fi
 function change_ws() {
     CUR=$PWD
     while [[ $CUR != $HOME ]]; do
-	if [ -f "$CUR"/devel/setup.bash ]; then
+	if [ -f "$CUR"/install_isolated/setup.bash ]; then
+	    export CATKIN_WORKSPACE=$CUR
+	    export USER_PACKAGE_PATH=$CATKIN_WORKSPACE/install_isolated
+	    source $USER_PACKAGE_PATH/setup.bash
+	    echo "ROS workspace: $CUR"
+	    break
+	elif [ -f "$CUR"/devel/setup.bash ]; then
 	    export CATKIN_WORKSPACE=$CUR
 	    export USER_PACKAGE_PATH=$CATKIN_WORKSPACE/devel
 	    source $USER_PACKAGE_PATH/setup.bash
