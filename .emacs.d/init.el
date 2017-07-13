@@ -1,3 +1,9 @@
+
+(set-frame-font "Ricty Diminished-15")
+(set-fontset-font
+    nil 'japanese-jisx0208
+    (font-spec :family "Ricty Diminished"))
+
 ;; global key bindings
 (global-set-key "\C-h" 'delete-backward-char)
 (global-set-key "\C-cc" 'compile)
@@ -195,18 +201,18 @@
  ;; If there is more than one, they won't work right.
  )
 
-(require 'srefactor)
-(require 'srefactor-lisp)
+(require 'srefactor nil t)
+(require 'srefactor-lisp nil t)
 
 ;; OPTIONAL: ADD IT ONLY IF YOU USE C/C++. 
-(semantic-mode 1) ;; -> this is optional for Lisp
+;(semantic-mode 1) ;; -> this is optional for Lisp
 
-(define-key c-mode-map (kbd "M-RET") 'srefactor-refactor-at-point)
-(define-key c++-mode-map (kbd "M-RET") 'srefactor-refactor-at-point)
-(global-set-key (kbd "M-RET o") 'srefactor-lisp-one-line)
-(global-set-key (kbd "M-RET m") 'srefactor-lisp-format-sexp)
-(global-set-key (kbd "M-RET d") 'srefactor-lisp-format-defun)
-(global-set-key (kbd "M-RET b") 'srefactor-lisp-format-buffer)
+;(define-key c-mode-map (kbd "M-RET") 'srefactor-refactor-at-point)
+;(define-key c++-mode-map (kbd "M-RET") 'srefactor-refactor-at-point)
+;(global-set-key (kbd "M-RET o") 'srefactor-lisp-one-line)
+;(global-set-key (kbd "M-RET m") 'srefactor-lisp-format-sexp)
+;(global-set-key (kbd "M-RET d") 'srefactor-lisp-format-defun)
+;(global-set-key (kbd "M-RET b") 'srefactor-lisp-format-buffer)
 
 
 ;; CEDET
@@ -227,7 +233,7 @@
      (format "indent %s" (shell-quote-argument (buffer-file-name))))
     (revert-buffer t t t)))
 
-(add-hook 'after-save-hook 'c-auto-format)
+;;(add-hook 'after-save-hook 'c-auto-format)
 
 
 ;; function-args (altanative to CEDET)
@@ -239,6 +245,7 @@
 ;; (define-key c++-mode-map (kbd "C-M-:") 'moo-complete)
 
 ;(require 'auto-complete)
-(require 'auto-complete-config)
-;(global-auto-complete-mode t)
-(setq-default ac-sources '(ac-source-semantic-raw))
+(when (require 'auto-complete-config nil t)
+  (global-auto-complete-mode t)
+  (setq-default ac-sources '(ac-source-semantic-raw))
+  )
