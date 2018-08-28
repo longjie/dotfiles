@@ -2,7 +2,7 @@
 export PATH=~/bin:~/.local/bin:/usr/local/cuda/bin:$PATH
 
 # setting EDITOR
-export EDITOR="emacs -nw"
+export EDITOR="vi"
 
 # load .bashrc
 test -r ~/.bashrc && . ~/.bashrc

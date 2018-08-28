@@ -148,3 +148,8 @@ fi
 
 # added by Miniconda2 installer
 #export PATH="/home/tajima/miniconda2/bin:$PATH"
+
+# Change prompt color for SSH connection
+if [ -n "$SSH_CLIENT" ]; then
+    export PS1='\u@\[\e[1;36m\]\h\[\e[m\]:\w$ '
+fi
