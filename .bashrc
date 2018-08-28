@@ -132,7 +132,19 @@ function change_ws() {
     done
 }
 
+#source /opt/ros/kinetic/setup.bash
+
 # tmuxで起動されたときにROSのワークスペースを設定する
 if [ -n "$TMUX" ]; then
     change_ws
 fi
+
+export PATH="/usr/local/cuda-9.2/bin:$PATH"
+export LD_LIBRARY_PATH="/usr/local/cuda-9.2/lib64:$LD_LIBRARY_PATH"
+
+if [ -e "~/torch/install/bin/torch-activate" ]; then
+    . /home/tajima/torch/install/bin/torch-activate
+fi
+
+# added by Miniconda2 installer
+#export PATH="/home/tajima/miniconda2/bin:$PATH"

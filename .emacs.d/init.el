@@ -1,3 +1,6 @@
+(setq gdb-many-windows t)
+;;; 変数の上にマウスカーソルを置くと値を表示
+(add-hook 'gdb-mode-hook '(lambda () (gud-tooltip-mode t)))
 
 (set-frame-font "Ricty Diminished-15")
 (set-fontset-font
