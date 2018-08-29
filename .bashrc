@@ -136,11 +136,17 @@ if [ -n "$TMUX" ]; then
     change_ws
 fi
 
-# pyenv settings
-#export PYENV_ROOT="$HOME/.pyenv"
-#export PATH="$PYENV_ROOT/bin:$PATH"
-#eval "$(pyenv init -)"
+export PATH="/usr/local/cuda-9.2/bin:$PATH"
+export LD_LIBRARY_PATH="/usr/local/cuda-9.2/lib64:$LD_LIBRARY_PATH"
 
-#export PATH="$HOME/miniconda3/bin:$PATH"
+if [ -e "~/torch/install/bin/torch-activate" ]; then
+    . /home/tajima/torch/install/bin/torch-activate
+fi
 
+# added by Miniconda2 installer
+#export PATH="/home/tajima/miniconda2/bin:$PATH"
 
+# Change prompt color for SSH connection
+if [ -n "$SSH_CLIENT" ]; then
+    export PS1='\u@\[\e[1;36m\]\h\[\e[m\]:\w$ '
+fi
