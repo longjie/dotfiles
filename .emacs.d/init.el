@@ -40,19 +40,10 @@
   (toggle-read-only))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
-(setq url-proxy-services
-      '(("http"  . "proxy.tytlabs.co.jp:10080")
-	("https" . "proxy.tytlabs.co.jp:10080")))
-
-(setq url-http-proxy-basic-auth-storage
-      '(("proxy.tytlabs.co.jp:10080" ("Proxy" . "ZTEyNDM6R2VuTW90bzI0"))))
-
 ;; package settings
 (require 'package)
-(setq package-archives
-      (append '(("marmalade" . "http://marmalade-repo.org/packages/")
-                ("melpa" . "http://melpa.milkbox.net/packages/"))
-              package-archives))
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 ;; Standard Jedi.el setting
@@ -181,9 +172,9 @@
 (require 'cython-mode nil t)
 (add-to-list 'auto-mode-alist '("\\.pyx\\'" . cython-mode))
 
-;; catkin_make
+;; catkin build
 (if (getenv "CATKIN_WORKSPACE")
-    (setq compile-command "catkin_make -C $CATKIN_WORKSPACE"))
+    (setq compile-command "catkin build"))
 
 ;; Octave mode
 (require 'ocrave-mode nil t)
@@ -249,3 +240,14 @@
   (global-auto-complete-mode t)
   (setq-default ac-sources '(ac-source-semantic-raw))
   )
+
+;; Emacs起動時にrst.elを読み込み
+(require 'rst)
+;; 拡張子の*.rst, *.restのファイルをrst-modeで開く
+(setq auto-mode-alist
+      (append '(("\\.rst$" . rst-mode)
+		("\\.rest$" . rst-mode)) auto-mode-alist))
+;; 背景が黒い場合はこうしないと見出しが見づらい
+(setq frame-background-mode 'dark)
+;; 全部スペースでインデントしましょう
+(add-hook 'rst-mode-hook '(lambda() (setq indent-tabs-mode nil)))

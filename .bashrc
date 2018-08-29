@@ -106,10 +106,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-if [ `domainname` = NEOROBOT ]; then
-    export http_proxy=proxy50.adm.toyota.co.jp:15520
-    export https_proxy=proxy50.adm.toyota.co.jp:15520
-fi
+#source /opt/ros/kinetic/setup.bash
 
 # pwdから上にたどってROSのワークスペースを探し最初に見つかったものに設定する
 function change_ws() {
@@ -132,7 +129,18 @@ function change_ws() {
     done
 }
 
+# source /opt/ros/kinetic/setup.bash
+
 # tmuxで起動されたときにROSのワークスペースを設定する
 if [ -n "$TMUX" ]; then
     change_ws
 fi
+
+# pyenv settings
+#export PYENV_ROOT="$HOME/.pyenv"
+#export PATH="$PYENV_ROOT/bin:$PATH"
+#eval "$(pyenv init -)"
+
+#export PATH="$HOME/miniconda3/bin:$PATH"
+
+
