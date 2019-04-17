@@ -1,0 +1,3 @@
+# Mouse scroll with track point
+xinput --set-prop 11 'Evdev Wheel Emulation' 1
+xinput --set-prop 11 'Evdev Wheel Emulation Button' 2
