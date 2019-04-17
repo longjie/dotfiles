@@ -59,8 +59,10 @@
 ;;(add-hook 'c-mode-common-hook 'flycheck-mode)
 
 ;; autopep8
-(require 'py-autopep8)
-(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+;(require 'py-autopep8)
+;(define-key python-mode-map (kbd "C-c F") 'py-autopep8)          ; バッファ全体のコード整形
+;(define-key python-mode-map (kbd "C-c f") 'py-autopep8-region)   ; 選択リジョン内のコード整形
+;;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
 ;;(setq py-autopep8-options '("--max-line-length=128"))
 
 (autoload 'markdown-mode "markdown-mode"
