@@ -150,3 +150,23 @@ fi
 if [ -n "$SSH_CLIENT" ]; then
     export PS1='\u@\[\e[1;36m\]\h\[\e[m\]:\w$ '
 fi
+
+
+# Change ssh for TORK ssh
+function tork_ssh() {
+    ssh -i ~/bin/tork_aws_oregon_keypair_createdviaconsole_ubuntu1204_server_20140209.pem ubuntu@ec2-54-187-152-198.us-west-2.compute.amazonaws.com
+}
+
+# Change ssh for Kashiwa GDX ssh
+function kashiwa_ssh() {
+    ssh tajima@10.0.0.7
+}
+
+function tork_scp() {
+    if [ $# == 1 ]; then
+	echo "Need file name more than one"
+	return
+    fi
+    # echo ${@:1:($#-1)}
+    scp -i ~/bin/tork_aws_oregon_keypair_createdviaconsole_ubuntu1204_server_20140209.pem ${@:1:($#-1)} ubuntu@ec2-54-187-152-198.us-west-2.compute.amazonaws.com:${@:$#}
+}
