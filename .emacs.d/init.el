@@ -150,9 +150,8 @@
 ;;(require 'parallel-replace)
 
 ;; ROS emacs(Indigo+)
-(add-to-list 'load-path "/opt/ros/kinetic/share/emacs/site-lisp")
-(add-to-list 'load-path "/opt/ros/jade/share/emacs/site-lisp")
-(add-to-list 'load-path "/opt/ros/indigo/share/emacs/site-lisp")
+(add-to-list 'load-path "/opt/ros/melodic/share/emacs/site-lisp")
+(add-to-list 'load-path "/opt/ros/noetic/share/emacs/site-lisp")
 (require 'rosemacs-config)
 
 ;; ROS emacs(Hydro)
